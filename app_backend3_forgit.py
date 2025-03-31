@@ -6,7 +6,7 @@ import os
 app = Flask(__name__, static_folder="static")  
 CORS(app)
 
-# Define the path to the dialogue JSON file
+# Ensure JSON_PATH uses a relative path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_PATH = os.path.join(BASE_DIR, os.getenv("DIALOGUE_JSON_PATH", "dialogues/Unpacientecondoloresdecabezaymareos.json"))
 
@@ -23,6 +23,7 @@ def get_dialogue():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ != "__main__":
-    # This ensures that the app runs properly with Gunicorn on Render
-    gunicorn_app = app
+if __name__ == "__main__":
+    # Get the port from the environment variable assigned by Render
+    port = int(os.getenv("PORT", 10000))  # Change default to 10000
+    app.run(host="0.0.0.0", port=port, debug=True)
