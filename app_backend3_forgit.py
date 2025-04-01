@@ -6,7 +6,7 @@ import os
 app = Flask(__name__, static_folder="static")  
 CORS(app)
 
-# Ensure JSON_PATH uses a relative path
+# Path to the JSON file (adjust if you move the file)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_PATH = os.path.join(BASE_DIR, os.getenv("DIALOGUE_JSON_PATH", "Unpacientecondoloresdecabezaymareos.json"))
 
@@ -21,9 +21,9 @@ def get_dialogue():
             data = json.load(file)
         return jsonify(data)
     except Exception as e:
+        print(f"❌ Error loading dialogue: {e}")  # Logs error to Render console
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    # Get the port from the environment variable assigned by Render
-    port = int(os.getenv("PORT", 10000))  # Change default to 10000
-    app.run(host="0.0.0.0", port=port, debug=True)
+    port = int(os.getenv("PORT", 10000))  # Use Render's assigned port
+    app.run(host="0.0.0.0", port=port)
