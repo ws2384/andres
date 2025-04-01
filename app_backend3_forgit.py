@@ -17,13 +17,10 @@ def serve_index():
 @app.route("/get_dialogue")
 def get_dialogue():
     try:
-        # Debug print to check path and trace error
-        print(f"📍 Trying to load JSON from: {JSON_PATH}")
-        with open(JSON_PATH, "r", encoding="utf-8") as file:
-            data = json.load(file)
-        return jsonify(data)
+        print("✅ /get_dialogue route was hit")
+        return jsonify([{"speaker": "Test", "text": "This is a test message."}])
     except Exception as e:
-        print(f"❌ Error loading dialogue: {e}")
+        print(f"❌ Unexpected error: {e}")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
