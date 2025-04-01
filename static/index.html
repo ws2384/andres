@@ -11,6 +11,7 @@
       margin: 20px;
       background-color: #f4f4f4;
     }
+
     .dialogue-container {
       max-width: 720px;
       height: 600px;
@@ -22,6 +23,7 @@
       overflow-y: auto;
       position: relative;
     }
+
     .message {
       padding: 10px;
       border-radius: 5px;
@@ -30,27 +32,58 @@
       word-wrap: break-word;
       border: 2px solid transparent;
     }
-    .doctor { background-color: #d1e7fd; border-color: #007bff; 
-text-align: left; }
-    .andres { background-color: #d4edda; border-color: #28a745; 
-text-align: left; }
-    .hint { background-color: #e2d5f7; border-color: #6a0dad; text-align: 
-right; font-style: italic; }
-    .patient { background-color: #fdd1d1; border-color: #dc3545; 
-text-align: right; }
-    .user { background-color: #e6e6e6; text-align: right; font-style: 
-italic; }
+
+    /* Andres (patient) aligned to left */
+    .andres,
+    .patient {
+      background-color: #d4edda;
+      border-color: #28a745;
+      align-self: flex-start;
+      text-align: left;
+    }
+
+    /* All others aligned to right */
+    .doctor,
+    .hint,
+    .user {
+      align-self: flex-end;
+      text-align: right;
+    }
+
+    .doctor {
+      background-color: #d1e7fd;
+      border-color: #007bff;
+    }
+
+    .hint {
+      background-color: #e2d5f7;
+      border-color: #6a0dad;
+      font-style: italic;
+    }
+
+    .patient {
+      background-color: #fdd1d1;
+      border-color: #dc3545;
+    }
+
+    .user {
+      background-color: #e6e6e6;
+      font-style: italic;
+    }
+
     .input-container {
       display: flex;
       margin-top: 20px;
       gap: 10px;
     }
+
     input {
       flex: 1;
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
     }
+
     button {
       padding: 10px 15px;
       background-color: #007bff;
@@ -59,10 +92,12 @@ italic; }
       border-radius: 5px;
       cursor: pointer;
     }
+
     button:disabled {
       background-color: #ccc;
       cursor: not-allowed;
     }
+
     .mic-button {
       background-color: #28a745;
       border-radius: 50%;
@@ -75,18 +110,21 @@ italic; }
       color: white;
       cursor: pointer;
     }
+
     .title {
       text-align: center;
       font-size: 24px;
       font-weight: bold;
       margin-bottom: 20px;
     }
+
     .instructions {
       text-align: center;
       font-size: 18px;
       margin-bottom: 20px;
       font-style: italic;
     }
+
     #dialogue-box {
       display: flex;
       flex-direction: column;
@@ -127,7 +165,6 @@ fetch("https://andres-1.onrender.com/get_dialogue");
 response.status);
         dialogue = await response.json();
 
-        // Show the first message
         if (dialogue.length > 0) {
           displayMessage(dialogue[0]);
           index = 1;
