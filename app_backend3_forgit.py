@@ -8,7 +8,7 @@ CORS(app)
 
 # Construct absolute path to JSON file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-JSON_PATH = os.path.join(BASE_DIR, os.getenv("DIALOGUE_JSON_PATH", "Unpacientecondoloresdecabezaymareos.json"))
+JSON_PATH = os.path.join(BASE_DIR, "Unpacientecondoloresdecabezaymareos.json")
 
 @app.route("/")
 def serve_index():
